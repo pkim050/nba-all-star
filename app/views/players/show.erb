@@ -1,0 +1,14 @@
+<h1><%= @team.name %></h1>
+
+<% Players.all.each do |element| %>
+    <li><%= element.name %> <%= element.position %></li>
+<% end %>
+
+<form action="/players">
+    <input type="submit" value="Edit Team">
+</form>
+
+<form action="/team/delete" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Team">
+</form>

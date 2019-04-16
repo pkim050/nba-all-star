@@ -1,0 +1,41 @@
+<center>
+<h1>Current NBA Players</h1>
+<br>
+<h4>You must select 13 players before pressing the "Add Players" button at the bottom of the table.</h4>
+<link rel="stylesheet" href="/stylesheets/players.css" />
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<select id="selectBox" onchange="changeFunc();">
+    <option disabled selected value> -- select an option -- </option>
+    <option value="">All</option>
+    <option value="PG">PG</option>
+    <option value="SG">SG</option>
+    <option value="G">G</option>
+    <option value="SF">SF</option>
+    <option value="PF">PF</option>
+    <option value="F">F</option>
+    <option value="C">C</option>
+</select>
+<form action="/playersteam" method="POST" onsubmit="return submitFunction()">
+    <table id="myTable">
+        <thead>    
+            <tr class="header">
+                <th class="headName">Name</th>
+                <th class="headpos">Position</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @all.each do |element| %>
+                <tr onclick="toggleClass(this, 'selected');">
+                    <td><%= element[:name] %></td>
+                    <td><%= element[:position] %></td>
+                    <td><input type="checkbox" name="name[]" value="<%= element[:name] %> - <%= element[:position] %>" id="player"></td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <input type="submit" value="Add Player">
+</form>
+</center>
+
+<script src="/javascripts/players.js" type="text/javascript"></script>

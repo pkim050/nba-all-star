@@ -1,0 +1,11 @@
+<h1>All-Star NBA Fantasy Team</h1>
+<p>Welcome to creating your own All-Star NBA Team app! This simple application keeps track of players you have on your team to form an all star team.</p>
+<br>
+
+<% if !logged_in? %>
+    <p>In order to get started, please signup or log in to your account.</p>
+    <a href="/login"><button>Log In</button></a>
+    <a href="/signup"><button>Sign Up</button></a>
+<% else %>
+    <p>Go to your team page to view your NBA All Star Team <a href="/team">Here</a>.</p>
+<% end %>

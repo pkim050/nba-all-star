@@ -1,0 +1,32 @@
+<h1>All Star Fantasy Team</h1>
+<br>
+<h2><%= @team.name %></h2>
+
+<% if Players.all.size <= 1 %>
+    <p>You don't have any players on your team.</p>
+<% else %>
+    <% Players.all.each do |element| %>
+        <p><%= element.name %> <%= element.position %></p>
+    <% end %>
+<% end %>
+
+<br>
+<br>
+
+<form action="/team/edit">
+    <label for="name">To edit team name: </label>
+    <input type="submit" name="name" value="Edit Team">
+</form>
+
+<br>
+<form action="/players">
+    <label>To have a new roster for your team: </label>
+    <input type="submit" value="New Roster">
+</form>
+
+<br>
+<form action="/team/delete" method="POST">
+    <label>To delete your team: </label>
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Team">
+</form>
