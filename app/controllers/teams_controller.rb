@@ -7,6 +7,15 @@ class TeamsController < ApplicationController
     get '/team' do
         if logged_in?
             if @team = current_user.team
+                @array = []
+                #binding.pry
+                if !current_user.players.empty?
+                    current_user.players.each do |element|
+                        temp = element.name
+                        temp2 = element.position
+                        @array << Player.find_by(name: temp, position: temp2, captain: true) if Player.find_by(name: temp, position: temp2, captain: true) != nil
+                    end
+                end
                 erb :'/team/show'
             else
                 erb :'/team/index'

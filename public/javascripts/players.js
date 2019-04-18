@@ -78,7 +78,7 @@ function toggleClass(e, className) {
 
 function submitFunction()
 {
-  if (count > 0) {
+  if (counter > 12) {
     return true;
   }
   else {

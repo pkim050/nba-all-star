@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
     get '/logout' do
         if logged_in?
+            Player.destroy_all
             session.clear
             session[:message] = "Successfully logged out."
             redirect '/'
@@ -39,10 +40,23 @@ class UsersController < ApplicationController
             session[:message] = "Error: You need to enter in a password, try again."
             redirect '/signup'
         else
-            session[:message] = "Successfully registered."
-            user = User.create(username: params[:username], email: params[:email], password: params[:password])
-            user.id = session[:user_id]
-            redirect '/team'
+            username = User.find_by(username: params[:username])
+            useremail = User.find_by(email: params[:email])
+            if username && useremail
+                session[:message] = "You already signed up with us, go to the login page instead!"
+                redirect '/signup'
+            elsif username
+                session[:message] = "Username already exists, try a different username."
+                redirect '/signup'
+            elsif useremail
+                session[:message] = "Email already exists, try a different email."
+                redirect '/signup'
+            else 
+                session[:message] = "Successfully registered."
+                user = User.create(username: params[:username], email: params[:email], password: params[:password])
+                user.id = session[:user_id]
+                redirect '/team'
+            end
         end
     end
 
@@ -55,7 +69,7 @@ class UsersController < ApplicationController
         user = User.find_by(username: params[:username])
         if user && user.authenticate(params[:password])
             session[:user_id] = user.id
-            session[:message] = "Successfully logged in."
+            session[:message] = "Successfully logged in." 
             redirect '/team'
         else
             if !user
@@ -66,4 +80,10 @@ class UsersController < ApplicationController
             redirect '/login'
         end
     end
+
+    get "/custom" do 
+        @players = current_user.players #current users players
+        erb :"/players/ptag"
+        #do something else
+    end 
 end

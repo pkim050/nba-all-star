@@ -25,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            <% @all.each do |element| %>
+            <% Player.all.each do |element| %>
                 <tr onclick="toggleClass(this, 'selected');">
                     <td><%= element[:name] %></td>
                     <td><%= element[:position] %></td>

@@ -2,15 +2,12 @@
 <br>
 <h2><%= @team.name %></h2>
 
-<% if Player.all.size < 2 %>
+<% if Player.all.size <= 1 %>
     <p>You don't have any players on your team.</p>
 <% else %>
-    <% if @array.empty? %>
-        <p>You don't have any players on your team.</p>
-    <% else %>
-        <% @array.each do |element| %>
-            <p><%= element.name %> <%= element.position %></p>
-        <% end %>
+    <% binding.pry %>
+    <% @array.each do |element| %>
+        <p><%= element.name %> <%= element.position %></p>
     <% end %>
 <% end %>
 
