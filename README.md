@@ -10,7 +10,7 @@ This sinatra app creates an NBA team that the user deems fit to be the best all 
 
 Or
 
-1. Click on this link: 
+1. Click on this link: https://fantasy-all-star-team.herokuapp.com/
 
 ## Development
 
