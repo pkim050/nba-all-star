@@ -55,7 +55,7 @@ class UsersController < ApplicationController
                 session[:message] = "Successfully registered."
                 user = User.create(username: params[:username], email: params[:email], password: params[:password])
                 user.id = session[:user_id]
-                redirect '/team'
+                erb :'/user/login'
             end
         end
     end
